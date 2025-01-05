@@ -1,32 +1,45 @@
-import { Component, computed, signal } from '@angular/core';
-import { DUMMY_USERS } from '../../others/dummy-users';
+import { Component, computed, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { User } from '../../interfaces/user';
-
-const numeroAleatorio = Math.floor(Math.random() * DUMMY_USERS.length);
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent 
 {
-  protected selectedUser = signal(DUMMY_USERS[numeroAleatorio]);
-  
-  protected imagePathSignals = computed(() => 'assets/users/' + this.selectedUser().avatar);
-
   /*
-  get imagePath(): string
-  {
-    return 'assets/users/' + this.selectedUser().avatar;
-  }
+    La forma clasica seria:
+
+      @Input({required: true}) user!: User;
+
+      get imagePath()
+      {
+        return 'assets/users/' + this.user().avatar;
+      }
+
+    Pero vamos a hacerlo con Signals.
   */
 
+  user = input.required<User>();
+  selectedUser = output<string>(); //Parece que si por el formato, pero el output no crea una signal
 
-  usuarioSeleccionado(usuario: User)
+  /*
+    Falta indicar que las Signals son inmutables.
+    Por lo que, para cambiarlas, si son objetos, hay que cambiarlas completamente, no un atributo concreto:
+
+    this.user.set(new User ());
+  */
+  
+  imagePath = computed (()=>
   {
-    const numeroAleatorio = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser.set(DUMMY_USERS[numeroAleatorio]);
+    return 'assets/users/' + this.user().avatar;
+  });
+
+  usuarioSeleccionado(userId: string)
+  {
+    this.selectedUser.emit(userId);
   }
 }

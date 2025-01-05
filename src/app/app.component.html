@@ -2,8 +2,10 @@
 
 <main>
     <ul id="users">
-        <li>
-            <app-user />
+        <li *ngFor="let user of users">
+            <app-user [user]="user" (selectedUser)="usuarioSeleccionado($event)"/>
         </li>
     </ul>
+
+    TASK OF THAT USER
 </main>
