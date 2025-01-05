@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { DUMMY_USERS } from '../../others/dummy-users';
 import { User } from '../../interfaces/user';
 
@@ -12,5 +12,21 @@ const numeroAleatorio = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 export class UserComponent 
 {
-  protected selectedUser: User = DUMMY_USERS[numeroAleatorio];
+  protected selectedUser = signal(DUMMY_USERS[numeroAleatorio]);
+  
+  protected imagePathSignals = computed(() => 'assets/users/' + this.selectedUser().avatar);
+
+  /*
+  get imagePath(): string
+  {
+    return 'assets/users/' + this.selectedUser().avatar;
+  }
+  */
+
+
+  usuarioSeleccionado(usuario: User)
+  {
+    const numeroAleatorio = Math.floor(Math.random() * DUMMY_USERS.length);
+    this.selectedUser.set(DUMMY_USERS[numeroAleatorio]);
+  }
 }

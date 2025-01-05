@@ -1,7 +1,8 @@
 <div>
-    <button>
-        <img src="assets/users/{{selectedUser.avatar}}" alt="userPhoto"/>
-        <img [src]="'assets/users/' + selectedUser.avatar" [alt]="selectedUser.name"/>
-        <span>{{selectedUser.name}}</span>
+    <button (click)="usuarioSeleccionado(selectedUser())">
+        <!-- <img src="assets/users/{{selectedUser().avatar}}" alt={{selectedUser().name}}/> -->
+        <!-- <img [src]="imagePath" [alt]="selectedUser().name"/> -->
+        <img [src]="imagePathSignals()" [alt]="selectedUser().name"/>
+        <span>{{selectedUser().name}}</span>
     </button>
 </div>
