@@ -25,6 +25,7 @@ export class UserComponent
 
   user = input.required<User>();
   selectedUser = output<string>(); //Parece que si por el formato, pero el output no crea una signal
+  // La forma antigua seria: @Output() seletedUser = new EventEmitter<string>();
 
   /*
     Falta indicar que las Signals son inmutables.
