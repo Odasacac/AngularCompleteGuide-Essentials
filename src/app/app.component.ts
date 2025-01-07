@@ -4,12 +4,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
 import { DUMMY_USERS } from './others/dummy-users';
 import { User } from './interfaces/user';
-import { CommonModule } from '@angular/common';
 import { TasksComponent } from "./components/tasks/tasks.component";
+import { dummyTasks } from './others/dummy-tasks';
+import { Task } from './interfaces/task';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, UserComponent, TasksComponent],
+  imports: [RouterOutlet, HeaderComponent, UserComponent, TasksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -17,7 +18,14 @@ export class AppComponent
 {
   users: User[] = DUMMY_USERS;
 
-  user: User = DUMMY_USERS[0];
+  userTasks: Task[] = [];
+
+  user: User = 
+  {
+    id: "",
+    name: "",
+    avatar: ""
+  }
 
   usuarioSeleccionado(id: string)
   {
@@ -26,6 +34,7 @@ export class AppComponent
     if (usuarioEncontradoPorId != null)
     {
       this.user = usuarioEncontradoPorId
+      this.userTasks = dummyTasks.filter(task => task.userId== usuarioEncontradoPorId.id);
     }
 
     /*
@@ -47,6 +56,17 @@ export class AppComponent
     */
   }
 
+  tareaCompletada(tareaId: string)
+  {
+    for (let task of this.userTasks)
+    {
+      if (task.id == tareaId)
+      {
+        task.completed=true;
+        break;
+      }
+    }
+  }
 
 }
 

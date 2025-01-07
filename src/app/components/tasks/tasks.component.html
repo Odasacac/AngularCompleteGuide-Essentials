@@ -1,1 +1,22 @@
-<p> {{user().name}}</p>
+<section id="tasks">
+    <header>
+        <h2> {{user().name}}'s Tasks</h2>
+        <menu>
+            <button (click)="addTask(user().id)">Add Task</button>
+        </menu>
+    </header>
+
+    <ul>
+        @for (task of userTasks(); track task.id)
+        {
+            @if (!task.completed)
+            {
+                <li>
+                    <app-task [task]="task" (completedTaskId)="tareaCompletada($event)"></app-task>
+                </li>
+            }
+        }
+    </ul>
+</section>
+
+

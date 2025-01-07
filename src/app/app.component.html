@@ -2,10 +2,21 @@
 
 <main>
     <ul id="users">
-        <li *ngFor="let user of users">
-            <app-user [user]="user" (selectedUser)="usuarioSeleccionado($event)"/>
-        </li>
+        @for (user of users; track user.id)
+        {
+            <li>
+                <app-user [user]="user" (selectedUser)="usuarioSeleccionado($event)"/>
+            </li>
+        }
     </ul>
 
-    <app-tasks [user]="user"></app-tasks>
+    @if (user.id != "")
+    {
+        <app-tasks [user]="user" [userTasks]="userTasks" (completedTaskId)="tareaCompletada($event)"></app-tasks>
+    }
+    @else
+    {
+        <p id="fallback">Select a user to see their tasks!</p>
+    }
+    
 </main>
