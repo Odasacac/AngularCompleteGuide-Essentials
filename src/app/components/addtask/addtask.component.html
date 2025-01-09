@@ -1,0 +1,25 @@
+    <h2>Add New Task</h2>
+
+    <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
+
+        <p>
+            <label>Title</label>
+            <input formControlName="title" />
+        </p>
+
+        <p>
+            <label>Due Date</label>
+            <input formControlName="dueDate" type="date"/>
+        </p>
+
+        <p>
+            <label>Summary</label>
+            <textarea formControlName="summary"></textarea>
+        </p>
+
+        <button type="submit">Add Task</button>
+        <button type="button" (click)="noTask()">Back</button>
+
+    </form>
+
+

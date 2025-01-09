@@ -7,7 +7,7 @@
     </header>
 
     <ul>
-        @for (task of userTasks(); track task.id)
+        @for (task of userSelectedTasks; track task.id)
         {
             @if (!task.completed)
             {

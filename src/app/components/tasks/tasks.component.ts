@@ -14,25 +14,28 @@ import { dummyTasks } from '../../others/dummy-tasks';
 export class TasksComponent 
 {
   user = input.required<User>();
-  userTasks = input.required<Task[]>();
-  completedTaskId = output<string>();
+  userIdParaNewTask = output<string>();
+  userTasks: Task[] = dummyTasks;
+
+  get userSelectedTasks()
+  {
+    return this.userTasks.filter((task) => task.userId == this.user().id);
+  }
 
   addTask(userId: string)
   {
-    const newTask =
-    {
-      id: userId,
-      ownerId: userId,
-      title: "",
-      dueDate: "",
-      content: "",
-      completed: false
-    }
+    this.userIdParaNewTask.emit(userId);
   }
 
   tareaCompletada(tareaId: string)
   {
-    this.completedTaskId.emit(tareaId);
-   
+    for (let task of this.userSelectedTasks)
+    {
+        if (task.id == tareaId)
+        {
+          task.completed=true;
+          break;
+        }
+    }
   }
 }
