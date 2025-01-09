@@ -12,7 +12,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class AddtaskComponent 
 {
   userId = input.required<string>();
-  backToApp = output();
+  backToApp = output<void>();
+  addNewTask = output <Task>();
   tareas: Task[] = dummyTasks;
 
   camposFormulario = 
@@ -38,8 +39,7 @@ export class AddtaskComponent
       completed: false
     }
 
-    this.tareas.push(newTask);
-    this.backToApp.emit();
+    this.addNewTask.emit(newTask);
   }
 
   noTask()

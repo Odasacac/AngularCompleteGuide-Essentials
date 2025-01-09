@@ -12,11 +12,11 @@
 
     @if (user.id != "" && !newTask)
     {
-        <app-tasks [user]="user" (userIdParaNewTask)="addNewTask($event)"></app-tasks>
+        <app-tasks [user]="user" [userTasks]="userTasks" (userIdParaNewTask)="addNewTask($event)"></app-tasks>
     }
     @else if (newTask)
     {
-        <app-addtask [userId]="userNewTaskId" (backToApp) = "backToApp()"></app-addtask>
+        <app-addtask [userId]="userNewTaskId" (backToApp) = "backToApp()" (addNewTask) = "addTask($event)"></app-addtask>
     }
     @else
     {

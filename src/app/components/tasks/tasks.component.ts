@@ -2,7 +2,6 @@ import { Component, input, output } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
-import { dummyTasks } from '../../others/dummy-tasks';
 
 
 @Component({
@@ -14,12 +13,13 @@ import { dummyTasks } from '../../others/dummy-tasks';
 export class TasksComponent 
 {
   user = input.required<User>();
+  userTasks = input.required<Task[]>();
   userIdParaNewTask = output<string>();
-  userTasks: Task[] = dummyTasks;
+  
 
   get userSelectedTasks()
   {
-    return this.userTasks.filter((task) => task.userId == this.user().id);
+    return this.userTasks().filter((task) => task.userId == this.user().id);
   }
 
   addTask(userId: string)
