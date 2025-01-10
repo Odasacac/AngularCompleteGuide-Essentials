@@ -5,9 +5,8 @@ import { UserComponent } from './components/user/user.component';
 import { DUMMY_USERS } from './others/dummy-users';
 import { User } from './interfaces/user';
 import { TasksComponent } from "./components/tasks/tasks.component";
-import { Task } from './interfaces/task';
 import { AddtaskComponent } from './components/addtask/addtask.component';
-import { dummyTasks } from './others/dummy-tasks';
+
 
 @Component({
   selector: 'app-root',
@@ -18,9 +17,9 @@ import { dummyTasks } from './others/dummy-tasks';
 export class AppComponent 
 {
   users: User[] = DUMMY_USERS;
-  userTasks: Task[] = dummyTasks;
   newTask: boolean= false;
   userNewTaskId: string = "";
+ 
 
   user: User = 
   {
@@ -43,19 +42,13 @@ export class AppComponent
     }
   }
 
-  addNewTask(userId: string)
+  goToAddNewTask(userId: string)
   {
     this.newTask = true;
     this.userNewTaskId = userId;
   }
 
-  addTask(task: Task)
-  {
-    this.newTask = false;
-    this.userTasks.push(task);
-  }
-
-  backToApp()
+  closeAddNewTask()
   {
     this.newTask = false;
   }

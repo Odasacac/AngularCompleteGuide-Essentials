@@ -12,7 +12,7 @@
             @if (!task.completed)
             {
                 <li>
-                    <app-task [task]="task" (completedTaskId)="tareaCompletada($event)"></app-task>
+                    <app-task [task]="task" (completedTaskId)="completedTask($event)"></app-task>
                 </li>
             }
         }

@@ -1,7 +1,7 @@
-import { Component, input, output } from '@angular/core';
-import { dummyTasks } from '../../others/dummy-tasks';
+import { Component, inject, input, output } from '@angular/core';
 import { Task } from '../../interfaces/task';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-addtask',
@@ -13,8 +13,7 @@ export class AddtaskComponent
 {
   userId = input.required<string>();
   backToApp = output<void>();
-  addNewTask = output <Task>();
-  tareas: Task[] = dummyTasks;
+  private tasksService = inject(TasksService);
 
   camposFormulario = 
   {
@@ -31,7 +30,7 @@ export class AddtaskComponent
 
     const newTask: Task =
     {
-      id: "t" + (this.tareas.length +1),
+      id: "",
       userId: this.userId(),
       title: formData.title,
       dueDate: formData.dueDate,
@@ -39,10 +38,11 @@ export class AddtaskComponent
       completed: false
     }
 
-    this.addNewTask.emit(newTask);
+    this.tasksService.addTask(newTask);
+    this.closeAddTask();
   }
 
-  noTask()
+  closeAddTask()
   {
     this.backToApp.emit();
   }

@@ -1,7 +1,7 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { User } from '../../interfaces/user';
-import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
+import { TasksService } from '../../services/tasks.service';
 
 
 @Component({
@@ -13,13 +13,14 @@ import { TaskComponent } from '../task/task.component';
 export class TasksComponent 
 {
   user = input.required<User>();
-  userTasks = input.required<Task[]>();
+
   userIdParaNewTask = output<string>();
+  tasksService = inject(TasksService);
   
 
   get userSelectedTasks()
   {
-    return this.userTasks().filter((task) => task.userId == this.user().id);
+    return this.tasksService.getUserTasks(this.user().id);
   }
 
   addTask(userId: string)
@@ -27,15 +28,8 @@ export class TasksComponent
     this.userIdParaNewTask.emit(userId);
   }
 
-  tareaCompletada(tareaId: string)
+  completedTask(tareaId: string)
   {
-    for (let task of this.userSelectedTasks)
-    {
-        if (task.id == tareaId)
-        {
-          task.completed=true;
-          break;
-        }
-    }
+    this.tasksService.completedTask(tareaId);
   }
 }
