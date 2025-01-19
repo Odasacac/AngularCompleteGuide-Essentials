@@ -1,0 +1,62 @@
+¿COMO EMPEZAR CON ANGULAR?
+
+1 - NODE.JS
+
+    Lo primero es instalar NODE.Js, que es un runtime para JavaScript.
+    No es necesario para ejecutar JavaScript porque se ejecutará en el navegador
+    Pero NODE.JS tiene el NPM (Node Package Manager), el cual tiene comandos para ejecutar funcionalidades de Angular.
+    Formalmente hablando no es necesario NODE.JS para crear un proyecto en Angular,
+    Pero ahorra muchísimo tiempo, por ejemplo a la hora de crear los archivos y carpetas de un proyecto inicial
+
+    Para instalarlo:
+
+        1 - https://nodejs.org/es
+        2 - Descargar Node.js (LTS)
+        3 - Instalarlo
+
+    Para comprobar que se ha instalado correctamente, puede ejecutarse:
+
+        node -v // Para ver la version de NODE.JS
+        npm -v // Para ver la version de NPM
+
+2 - ANGULAR CLI
+
+    Para instalar Angular CLI (Command Line Interface), se ejecuta el siguiente comando de NODE.JS en la terminal:
+
+        npm install -g @angular/cli
+
+    Con el Angular CLI instalado, ahora se puede crear un proyecto en Angular
+    
+3 - CREAR NUEVO PROYECTO
+
+    Para crear un nuevo proyecto, lo primero es ir a la carpeta donde se quiere crear y después ejecutar el comando:
+
+        ng new nombreDelProyecto
+
+        ng new clinica-fisio // Por ejemplo
+
+    Al ejecutarlo, se realizaran algunas preguntas, como que formato de estilo se quiere, o si se quiere activar Server-Side Rendering, por ejemplo.
+
+    Usando --defaults se crea un proyecto nuevo aceptando las configuraciones predeterminadas:
+
+        ng new nombreDelProyecto --defaults
+
+4 - TRABAJAR CON EL PROYECTO
+
+    Es necesario un editor de codigo, Visual Studio Code es el mas usado para esto:
+
+        https://code.visualstudio.com/download
+
+    Después de crear el proyecto, se puede iniciar el servidor con:
+
+        ng serve
+
+    O:
+
+        npm start
+
+    También se puede usar Crtl+C para detener el servidor.
+
+
+
+    
